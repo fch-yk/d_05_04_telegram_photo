@@ -1,12 +1,10 @@
 import os
 from pathlib import Path
-from pprint import pprint
 from random import randint
-from urllib.parse import urlsplit, unquote
+from urllib.parse import unquote, urlsplit
 
-
-from environs import Env
 import requests
+from environs import Env
 
 
 def download_image(url, folder_name, file_name, payload=None):
