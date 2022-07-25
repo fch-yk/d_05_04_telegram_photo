@@ -5,9 +5,11 @@ import telegram
 def main():
     env = Env()
     env.read_env()
-    bot_token = env('TELEGRAM_TOKEN')
+    with env.prefixed("TELEGRAM_"):
+        bot_token = env('TOKEN')
+        channel_id = env('CHANNEL_ID')
     bot = telegram.Bot(token=bot_token)
-    print(bot.get_me())
+    bot.send_message(chat_id=channel_id, text="Hello, space channel!")
 
 
 if __name__ == '__main__':
