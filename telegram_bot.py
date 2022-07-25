@@ -9,7 +9,8 @@ def main():
         bot_token = env('TOKEN')
         channel_id = env('CHANNEL_ID')
     bot = telegram.Bot(token=bot_token)
-    bot.send_message(chat_id=channel_id, text="Hello, space channel!")
+    with open('images/nasa_epic_2.png', 'rb') as image:
+        bot.send_document(chat_id=channel_id, document=image)
 
 
 if __name__ == '__main__':
