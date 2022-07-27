@@ -1,6 +1,6 @@
-# Upload space photoes to Telegram
+# Space photos for Telegram
 
-The program ...
+The project scripts can be used for downloading space photos and upload them to Telegram channel.
 
 ## Prerequisites
 
@@ -16,19 +16,74 @@ pip install -r requirements.txt
 ```
 
 - Set up environmental variables in your operating system or in .env file. The variables are:
+  - NASA_API_KEY is used for authorization at [NASA APIs](https://api.nasa.gov/)
+  - TELEGRAM_TOKEN is used to manage your telegram bot
+  - TELEGRAM_CHANNEL_ID is the ID of your telegram channel
+  - TELEGRAM_UPLOAD_DELAY is a pause between photo uploads (sec); default value: 14400 sec (4 hours)
 
 To set up variables in .env file, create it in the root directory of the project and fill it up like this:
 
 ```bash
-
+NASA_API_KEY=yournasaaipkey
+TELEGRAM_TOKEN=yourbottoken
+TELEGRAM_CHANNEL_ID=@example_channel
+TELEGRAM_UPLOAD_DELAY=15000
 ```
 
-## Running script
+## Scripts that download pictures
+
+These scripts download pictures to the folder named 'images' in the root directory of the project
+
+### Script "fetch_apod"
+
+- Can download 30-50 pictures from [Astronomy Picture of the Day](https://apod.nasa.gov/apod/astropix.html)
 
 - Run:
 
 ```bash
-python
+python fetch_apod.py
+```
+
+### Script "fetch_epic_images"
+
+- Can download 5-10 pictures from [EPIC](https://epic.gsfc.nasa.gov/)
+
+- Run:
+
+```bash
+python fetch_epic_images.py
+```
+
+### Script "fetch_spacex_images"
+
+- Can download pictures using [SpaceX-API](https://github.com/r-spacex/SpaceX-API)
+
+- To download pictures of the latest launch, run:
+
+```bash
+python fetch_spacex_images.py
+```
+
+- To download pictures by the launch ID, run:
+
+```bash
+python fetch_spacex_images.py --launch_id 5eb87d47ffd86e000604b38a
+```
+
+where `5eb87d47ffd86e000604b38a` is a launch ID
+
+## Scripts that upload pictures to your telegram channel
+
+### Script "telegram_bot"
+
+- Uses your Telegram bot to upload pictures from 'images' folder (and all its subfolders) to your Telegram channel.
+
+- Uploads pictures with a pause, see TELEGRAM_UPLOAD_DELAY in the section [Installing](#installing)
+
+- Run:
+
+```bash
+python telegram_bot.py
 ```
 
 ## Project goals
