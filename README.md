@@ -16,10 +16,10 @@ pip install -r requirements.txt
 ```
 
 - Set up environmental variables in your operating system or in .env file. The variables are:
-  - NASA_API_KEY is used for authorization at [NASA APIs](https://api.nasa.gov/)
-  - TELEGRAM_TOKEN is used to manage your telegram bot
-  - TELEGRAM_CHANNEL_ID is the ID of your telegram channel
-  - TELEGRAM_UPLOAD_DELAY is a pause between photo uploads (sec); default value: 14400 sec (4 hours)
+  - `NASA_API_KEY` is used for authorization at [NASA APIs](https://api.nasa.gov/)
+  - `TELEGRAM_TOKEN` is used to manage your telegram bot
+  - `TELEGRAM_CHANNEL_ID` is the ID of your telegram channel
+  - `TELEGRAM_UPLOAD_DELAY` is a pause between photo uploads (sec); default value: 14400 sec (4 hours)
 
 To set up variables in .env file, create it in the root directory of the project and fill it up like this:
 
@@ -74,17 +74,33 @@ where `5eb87d47ffd86e000604b38a` is a launch ID
 
 ## Scripts that upload pictures to your telegram channel
 
-### Script "telegram_bot"
+These scripts use your Telegram bot to upload pictures from "images" folder (and all its subfolders) to your Telegram channel. Environment variables `TELEGRAM_TOKEN` and `TELEGRAM_CHANNEL_ID` should be set, see the section [Installing](#installing)
 
-- Uses your Telegram bot to upload pictures from 'images' folder (and all its subfolders) to your Telegram channel.
+### Script "upload_all_photos"
 
-- Uploads pictures with a pause, see TELEGRAM_UPLOAD_DELAY in the section [Installing](#installing)
+- Uploads pictures with a pause, see `TELEGRAM_UPLOAD_DELAY` in the section [Installing](#installing)
 
 - Run:
 
 ```bash
-python telegram_bot.py
+python upload_all_photos.py
 ```
+
+### Script "upload_one_photo"
+
+- To upload a random photo, run:
+
+```bash
+python upload_one_photo.py
+```
+
+- To upload a specified image file, run:
+
+```bash
+python upload_one_photo.py --file_name nasa_apod_0.jpg
+```
+
+where `nasa_apod_0.jpg` is a file name
 
 ## Project goals
 
