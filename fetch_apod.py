@@ -15,10 +15,10 @@ def fetch_astronomy_pictures(nasa_api_key):
     response.raise_for_status()
     media_cards = response.json()
     for number, media_card in enumerate(media_cards):
-        link = media_card.get('url', None)
-        if media_card['media_type'] != 'image' or link is None:
+        if media_card['media_type'] != 'image':
             continue
 
+        link = media_card['url']
         extension = get_link_extension(link)
         download_image(link, folder_name, f'nasa_apod_{number}{extension}')
 
