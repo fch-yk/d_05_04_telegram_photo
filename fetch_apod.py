@@ -3,7 +3,7 @@ from random import randint
 import requests
 from environs import Env
 
-from save_images import download_image, get_link_extension
+from images_files import download_image, get_link_extension
 
 
 def fetch_astronomy_pictures(nasa_api_key):

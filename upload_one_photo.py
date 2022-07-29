@@ -1,22 +1,26 @@
 import argparse
-import os
 from random import choice
 
 import telegram
 from environs import Env
 
+from images_files import get_files_paths
+
 
 def create_input_args_parser():
     description = (
-        'Uploads a photo from "images" folder to your Telegram channel.'
+        'Uploads a photo to your Telegram channel.'
     )
     parser = argparse.ArgumentParser(description=description)
 
     parser.add_argument(
-        '--file_name',
-        metavar='{file name}',
-        help='file name (e.g.: nasa_apod_0.jpg), a random file by default',
-        default=choice(list(os.walk('images'))[0][-1])
+        '--file_path',
+        metavar='{file path}',
+        help=(
+            'file path (e.g.: E:\tmp\nasa_apod_0.jpg), '
+            'a random file from "Images" folder by default'
+        ),
+        default=choice(get_files_paths())
     )
 
     return parser
@@ -31,9 +35,8 @@ def main():
 
     bot = telegram.Bot(token=bot_token)
     input_args_parser = create_input_args_parser()
-    file_name = input_args_parser.parse_args().file_name
+    file_path = input_args_parser.parse_args().file_path
 
-    file_path = os.path.join('images', file_name)
     with open(file_path, 'rb') as image:
         bot.send_document(chat_id=channel_id, document=image)
 

@@ -3,7 +3,7 @@ from random import randint
 import requests
 from environs import Env
 
-from save_images import download_image
+from images_files import download_image
 
 
 def fetch_epic_pictures(nasa_api_key):

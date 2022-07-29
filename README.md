@@ -97,10 +97,10 @@ python upload_one_photo.py
 - To upload a specified image file, run:
 
 ```bash
-python upload_one_photo.py --file_name nasa_apod_0.jpg
+python upload_one_photo.py --file_path E:\tmp\nasa_apod_0.jpg
 ```
 
-where `nasa_apod_0.jpg` is a file name
+where `E:\tmp\nasa_apod_0.jpg` is a file path
 
 ## Project goals
 

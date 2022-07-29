@@ -2,7 +2,7 @@ import argparse
 
 import requests
 
-from save_images import download_image
+from images_files import download_image
 
 
 def create_input_args_parser():

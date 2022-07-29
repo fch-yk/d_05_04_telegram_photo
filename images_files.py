@@ -20,3 +20,18 @@ def get_link_extension(link):
     path = urlsplit(link).path
     unquoted_path = unquote(path)
     return os.path.splitext(unquoted_path)[1]
+
+
+def get_files_paths():
+    files_paths = []
+    max_file_size = 20971520
+    directories_content = os.walk('images')
+    for folder_path, __, files_names in directories_content:
+        for file_name in files_names:
+            file_path = os.path.join(folder_path, file_name)
+            file_size = Path(file_path).stat().st_size
+            if file_size > max_file_size:
+                continue
+            files_paths.append(file_path)
+
+    return files_paths
