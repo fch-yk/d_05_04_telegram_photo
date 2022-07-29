@@ -18,5 +18,5 @@ def download_image(url, folder_name, file_name, payload=None):
 
 def get_link_extension(link):
     path = urlsplit(link).path
-    unquouted_path = unquote(path)
-    return os.path.splitext(unquouted_path)[1]
+    unquoted_path = unquote(path)
+    return os.path.splitext(unquoted_path)[1]
