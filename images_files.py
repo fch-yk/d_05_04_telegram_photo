@@ -22,10 +22,10 @@ def get_link_extension(link):
     return os.path.splitext(unquoted_path)[1]
 
 
-def get_files_paths():
+def get_files_paths(folder_name):
     files_paths = []
     max_file_size = 20971520
-    directories_content = os.walk('images')
+    directories_content = os.walk(folder_name)
     for folder_path, __, files_names in directories_content:
         for file_name in files_names:
             file_path = os.path.join(folder_path, file_name)

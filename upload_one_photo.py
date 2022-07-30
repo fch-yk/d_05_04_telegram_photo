@@ -7,7 +7,7 @@ from environs import Env
 from images_files import get_files_paths
 
 
-def create_input_args_parser():
+def create_input_args_parser(folder_name):
     description = (
         'Uploads a photo to your Telegram channel.'
     )
@@ -18,9 +18,9 @@ def create_input_args_parser():
         metavar='{file path}',
         help=(
             'file path (e.g.: E:\tmp\nasa_apod_0.jpg), '
-            'a random file from "Images" folder by default'
+            'a random file from folder with images by default'
         ),
-        default=choice(get_files_paths())
+        default=choice(get_files_paths(folder_name))
     )
 
     return parser
@@ -29,12 +29,13 @@ def create_input_args_parser():
 def main():
     env = Env()
     env.read_env()
+    folder_name = env('IMAGES_FOLDER', 'images')
     with env.prefixed("TELEGRAM_"):
         bot_token = env('TOKEN')
         channel_id = env('CHANNEL_ID')
 
     bot = telegram.Bot(token=bot_token)
-    input_args_parser = create_input_args_parser()
+    input_args_parser = create_input_args_parser(folder_name)
     file_path = input_args_parser.parse_args().file_path
 
     with open(file_path, 'rb') as image:

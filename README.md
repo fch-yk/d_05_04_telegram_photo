@@ -1,6 +1,6 @@
 # Space photos for Telegram
 
-The project scripts can be used for downloading space photos and upload them to Telegram channel.
+The project scripts can be used for downloading space photos and uploading them to your Telegram channel.
 
 ## Prerequisites
 
@@ -20,6 +20,9 @@ pip install -r requirements.txt
   - `TELEGRAM_TOKEN` is used to manage your telegram bot
   - `TELEGRAM_CHANNEL_ID` is the ID of your telegram channel
   - `TELEGRAM_UPLOAD_DELAY` is a pause between photo uploads (sec); default value: 14400 sec (4 hours)
+  - `IMAGES_FOLDER` is a path to a folder containing images; default value: images.
+      1. You can specify a relative path, e.g.: my_images. In this case, the folder is in the root folder of the project.
+      2. You can specify an absolute path, e.g.: E:\tmp\images.
 
 To set up variables in .env file, create it in the root directory of the project and fill it up like this:
 
@@ -28,11 +31,12 @@ NASA_API_KEY=yournasaaipkey
 TELEGRAM_TOKEN=yourbottoken
 TELEGRAM_CHANNEL_ID=@example_channel
 TELEGRAM_UPLOAD_DELAY=15000
+IMAGES_FOLDER=my_images
 ```
 
 ## Scripts that download pictures
 
-These scripts download pictures to the folder named 'images' in the root directory of the project
+These scripts download pictures to the folder (see `IMAGES_FOLDER` in the section [Installing](#installing))
 
 ### Script "fetch_apod"
 
@@ -74,7 +78,7 @@ where `5eb87d47ffd86e000604b38a` is a launch ID
 
 ## Scripts that upload pictures to your telegram channel
 
-These scripts use your Telegram bot to upload pictures from "images" folder (and all its subfolders) to your Telegram channel. Environment variables `TELEGRAM_TOKEN` and `TELEGRAM_CHANNEL_ID` should be set, see the section [Installing](#installing)
+These scripts use your Telegram bot to upload pictures from the "images folder" (and all its subfolders) to your Telegram channel. Environment variables `TELEGRAM_TOKEN`, `TELEGRAM_CHANNEL_ID` and `IMAGES_FOLDER` should be set, see the section [Installing](#installing)
 
 ### Script "upload_all_photos"
 
@@ -100,7 +104,7 @@ python upload_one_photo.py
 python upload_one_photo.py --file_path E:\tmp\nasa_apod_0.jpg
 ```
 
-where `E:\tmp\nasa_apod_0.jpg` is a file path
+where `E:\tmp\nasa_apod_0.jpg` is an absolute file path
 
 ## Project goals
 

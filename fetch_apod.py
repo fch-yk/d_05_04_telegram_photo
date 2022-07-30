@@ -6,8 +6,7 @@ from environs import Env
 from images_files import download_image, get_link_extension
 
 
-def fetch_astronomy_pictures(nasa_api_key):
-    folder_name = 'images'
+def fetch_astronomy_pictures(nasa_api_key, folder_name):
     url = 'https://api.nasa.gov/planetary/apod'
     images_count = randint(30, 50)
     payload = {'api_key': nasa_api_key, 'count': images_count}
@@ -27,7 +26,8 @@ def main():
     env = Env()
     env.read_env()
     nasa_api_key = env('NASA_API_KEY', 'DEMO_KEY')
-    fetch_astronomy_pictures(nasa_api_key)
+    folder_name = env('IMAGES_FOLDER', 'images')
+    fetch_astronomy_pictures(nasa_api_key, folder_name)
 
 
 if __name__ == '__main__':

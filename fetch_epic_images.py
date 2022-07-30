@@ -6,8 +6,7 @@ from environs import Env
 from images_files import download_image
 
 
-def fetch_epic_pictures(nasa_api_key):
-    folder_name = 'images'
+def fetch_epic_pictures(nasa_api_key, folder_name):
     url = 'https://api.nasa.gov/EPIC/api/natural/images'
     payload = {'api_key': nasa_api_key}
     response = requests.get(url, params=payload)
@@ -28,7 +27,8 @@ def main():
     env = Env()
     env.read_env()
     nasa_api_key = env('NASA_API_KEY', 'DEMO_KEY')
-    fetch_epic_pictures(nasa_api_key)
+    folder_name = env('IMAGES_FOLDER', 'images')
+    fetch_epic_pictures(nasa_api_key, folder_name)
 
 
 if __name__ == '__main__':
