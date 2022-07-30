@@ -1,4 +1,5 @@
 from random import randint
+from datetime import datetime
 
 import requests
 from environs import Env
@@ -16,10 +17,10 @@ def fetch_epic_pictures(nasa_api_key, folder_name):
 
     for number, media_card in enumerate(media_cards):
         image_name = media_card['image']
-        image_date = media_card['date']
-        year, month, day = image_date.split()[0].split(sep='-')
+        image_date = datetime.fromisoformat(media_card['date'])
+        formatted_date = image_date.strftime('%Y/%m/%d')
         base_url = 'https://api.nasa.gov/EPIC/archive/natural'
-        url = f'{base_url}/{year}/{month}/{day}/png/{image_name}.png'
+        url = f'{base_url}/{formatted_date}/png/{image_name}.png'
         download_image(url, folder_name, f'nasa_epic_{number}.png', payload)
 
 
