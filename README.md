@@ -27,7 +27,7 @@ pip install -r requirements.txt
 To set up variables in .env file, create it in the root directory of the project and fill it up like this:
 
 ```bash
-NASA_API_KEY=yournasaaipkey
+NASA_API_KEY=yournasaapikey
 TELEGRAM_TOKEN=yourbottoken
 TELEGRAM_CHANNEL_ID=@example_channel
 TELEGRAM_UPLOAD_DELAY=15000
