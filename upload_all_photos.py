@@ -1,3 +1,4 @@
+import sys
 from random import shuffle
 from time import sleep
 
@@ -20,9 +21,15 @@ def main():
         files_paths = get_files_paths(folder_name)
         shuffle(files_paths)
         for file_path in files_paths:
-            with open(file_path, 'rb') as image:
-                bot.send_document(chat_id=channel_id, document=image)
-            sleep(upload_delay)
+            try:
+                with open(file_path, 'rb') as image:
+                    bot.send_document(chat_id=channel_id, document=image)
+                sleep(upload_delay)
+                error_delay = 1
+            except telegram.error.NetworkError as fail:
+                print(f'Unable to send a message: {fail}', file=sys.stderr)
+                sleep(error_delay)
+                error_delay = 15
 
 
 if __name__ == '__main__':
