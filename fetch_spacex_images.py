@@ -1,4 +1,5 @@
 import argparse
+import sys
 
 import requests
 from environs import Env
@@ -26,8 +27,12 @@ def fetch_spacex_last_launch(launch_id, folder_name):
     response = requests.get(url)
     response.raise_for_status()
     img_links = response.json()['links']['flickr']['original']
+    if not img_links:
+        return 'No images are found for the launch'
     for number, link in enumerate(img_links):
         download_image(link, folder_name, f'spacex_{number}.jpg')
+
+    return ''
 
 
 def main():
@@ -36,7 +41,9 @@ def main():
     env = Env()
     env.read_env()
     folder_name = env('IMAGES_FOLDER', 'images')
-    fetch_spacex_last_launch(launch_id, folder_name)
+    error_text = fetch_spacex_last_launch(launch_id, folder_name)
+    if error_text:
+        print(error_text, file=sys.stderr)
 
 
 if __name__ == '__main__':
