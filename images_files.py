@@ -6,7 +6,7 @@ import requests
 
 
 def download_image(url, folder_name, file_name, payload=None):
-    Path(folder_name).mkdir(exist_ok=True)
+    Path(folder_name).mkdir(parents=True, exist_ok=True)
     file_path = os.path.join(folder_name, file_name)
 
     response = requests.get(url, params=payload)
