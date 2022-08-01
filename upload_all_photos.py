@@ -17,6 +17,7 @@ def main():
         channel_id = env('CHANNEL_ID')
         upload_delay = env.int('UPLOAD_DELAY', 14400)
     bot = telegram.Bot(token=bot_token)
+    error_delay = 1
     while True:
         files_paths = get_files_paths(folder_name)
         shuffle(files_paths)
