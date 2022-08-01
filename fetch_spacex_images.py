@@ -7,7 +7,7 @@ from images_files import download_image
 
 
 def create_input_args_parser():
-    description = 'The script downloads photoes from  SpaceX'
+    description = 'The script downloads photos from  SpaceX'
     parser = argparse.ArgumentParser(description=description)
 
     parser.add_argument(
