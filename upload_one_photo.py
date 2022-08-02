@@ -4,7 +4,7 @@ from random import choice
 import telegram
 from environs import Env
 
-from images_files import get_files_paths
+from images_files import get_files_paths, filter_files_for_telegram
 
 
 def create_input_args_parser(folder_name):
@@ -12,6 +12,7 @@ def create_input_args_parser(folder_name):
         'Uploads a photo to your Telegram channel.'
     )
     parser = argparse.ArgumentParser(description=description)
+    files_paths = get_files_paths(folder_name)
 
     parser.add_argument(
         '--file_path',
@@ -20,7 +21,7 @@ def create_input_args_parser(folder_name):
             'file path (e.g.: E:\tmp\nasa_apod_0.jpg), '
             'a random file from folder with images by default'
         ),
-        default=choice(get_files_paths(folder_name))
+        default=choice(filter_files_for_telegram(files_paths))
     )
 
     return parser

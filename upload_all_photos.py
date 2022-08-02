@@ -5,7 +5,7 @@ from time import sleep
 import telegram
 from environs import Env
 
-from images_files import get_files_paths
+from images_files import get_files_paths, filter_files_for_telegram
 
 
 def main():
@@ -20,8 +20,9 @@ def main():
     error_delay = 1
     while True:
         files_paths = get_files_paths(folder_name)
-        shuffle(files_paths)
-        for file_path in files_paths:
+        suitable_files_paths = filter_files_for_telegram(files_paths)
+        shuffle(suitable_files_paths)
+        for file_path in suitable_files_paths:
             try:
                 with open(file_path, 'rb') as image:
                     bot.send_document(chat_id=channel_id, document=image)
